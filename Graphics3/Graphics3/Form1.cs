@@ -137,5 +137,28 @@ namespace Graphics3
             init();
             graphics.Clear(Color.Gray);
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        //key press event pf the parallel projection angle text box
+        //make it accept only numbers
+        private void parallelProjectionAngle_text_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.') && e.KeyChar != 4)
+            {
+                e.Handled = true;
+                
+            }
+
+            // only allow one decimal point
+            //if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            //{
+            //    e.Handled = true;
+            //}
+        }
     }
 }

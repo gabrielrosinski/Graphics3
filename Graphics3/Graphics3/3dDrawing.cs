@@ -64,12 +64,15 @@ namespace Graphics3
         {
             List<Point> objectsPointsList = new List<Point>();
 
+            int angle = Convert.ToInt32(form.parallelProjectionAngle_text.Text);
+
             //create 2d representation of the polygons
             foreach (Polygon polygon in polygonList)
             {
                 foreach (Point3D point3D in polygon.polygonPoints)
                 {
-                    var point2D = parallelProjection(point3D, 90.0);
+                    
+                    var point2D = parallelProjection(point3D, angle);
                     objectsPointsList.Add(point2D);
                 }
 
