@@ -40,10 +40,8 @@ namespace Graphics3
             if (graphics != null) {
                 graphics.Dispose();
             }
-            else
-            {
-                graphics = Canvas.CreateGraphics();
-            }
+
+            graphics = Canvas.CreateGraphics();
             
             
             pen = new Pen(Color.Black, 2);
@@ -118,22 +116,26 @@ namespace Graphics3
         */
         private void drawButton_Click(object sender, EventArgs e)
         {
+            clearScreen();
             Draw3d.drawPrespective(this, this.polygonList);
         }
 
         private void drawParallelClicked(object sender, EventArgs e)
         {
+            clearScreen();
             Draw3d.drawParallel(this, this.polygonList);
         }
 
         private void drawObliqueClicked(object sender, EventArgs e)
         {
+            clearScreen();
             Draw3d.drawOblique(this, this.polygonList);
         }
 
         public void clearScreen()
         {
             init();
+            graphics.Clear(Color.Gray);
         }
     }
 }

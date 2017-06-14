@@ -77,10 +77,10 @@ namespace Graphics3
         }
 
         //Parallel projection
-        public static Point parallelProjection(Point3D Points, double Angle)
+        public static Point parallelProjection(Point3D point, double angle)
         {
-            double cos = (Math.Cos(Angle * (Math.PI / 180)));
-            double sin = (Math.Sin(Angle * (Math.PI / 180)));
+            double cos = (Math.Cos(angle * (Math.PI / 180)));
+            double sin = (Math.Sin(angle * (Math.PI / 180)));
 
             double[,] parallelMatrix = { 
                 { 1, 0, 0, 0 },
@@ -91,9 +91,9 @@ namespace Graphics3
 
             double[,] pointMatrix = { 
                 {
-                    Points.x,
-                    Points.y,
-                    Points.z,
+                    point.x,
+                    point.y,
+                    point.z,
                     1
                 }
             };
