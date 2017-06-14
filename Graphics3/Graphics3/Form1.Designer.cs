@@ -41,7 +41,7 @@
             this.drawButton.Name = "drawButton";
             this.drawButton.Size = new System.Drawing.Size(160, 50);
             this.drawButton.TabIndex = 1;
-            this.drawButton.Text = "Parallel Projection";
+            this.drawButton.Text = "Perspective projection";
             this.drawButton.UseVisualStyleBackColor = true;
             this.drawButton.Click += new System.EventHandler(this.drawButton_Click);
             // 
@@ -60,9 +60,9 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 50);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Oblique projection";
+            this.button1.Text = "Parallel Projection";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.drawParallelClicked);
             // 
             // button2
             // 
@@ -70,8 +70,9 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 50);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Perspective projection";
+            this.button2.Text = "Oblique projection";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.drawObliqueClicked);
             // 
             // Form1
             // 

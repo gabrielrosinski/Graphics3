@@ -45,7 +45,7 @@ namespace Graphics3
                 { 0, 0, 0, 0 },
                 { 0, 0, 0, 1 }
             };
-            double[,] PointMatrix = { 
+            double[,] pointMatrix = { 
                 {
                     point.x,
                     point.y,
@@ -53,13 +53,103 @@ namespace Graphics3
                     1
                 }
             };
-            double[,] Result = multiplyMatrix(PointMatrix, prespectiveMatrix);
-            return new Point((int)Result[0, 0], (int)Result[0, 1]);
+            double[,] result = multiplyMatrix(pointMatrix, prespectiveMatrix);
+            return new Point((int)result[0, 0], (int)result[0, 1]);
+        }
+
+
+        public static void drawParallel(Form1 form, List<Polygon> polygonList)
+        {
+            List<Point> objectsPointsList = new List<Point>();
+
+            //create 2d representation of the polygons
+            foreach (Polygon polygon in polygonList)
+            {
+                foreach (Point3D point3D in polygon.polygonPoints)
+                {
+                    var point2D = parallelProjection(point3D, 90.0);
+                    objectsPointsList.Add(point2D);
+                }
+            }
+
+            //draw objects in prespective
+            drawPolygons(form, objectsPointsList);
+        }
+
+        //Parallel projection
+        public static Point parallelProjection(Point3D Points, double Angle)
+        {
+            double cos = (Math.Cos(Angle * (Math.PI / 180)));
+            double sin = (Math.Sin(Angle * (Math.PI / 180)));
+
+            double[,] parallelMatrix = { 
+                { 1, 0, 0, 0 },
+                { 0, 1, 0, 0 },
+                { cos, sin, 0, 0 },
+                { 0, 0, 0, 1 }
+            };
+
+            double[,] pointMatrix = { 
+                {
+                    Points.x,
+                    Points.y,
+                    Points.z,
+                    1
+                }
+            };
+
+            double[,] result = multiplyMatrix(pointMatrix, parallelMatrix);
+
+            return new Point((int)result[0, 0], (int)result[0, 1]);
+        }
+
+        //
+        public static void drawOblique(Form1 form, List<Polygon> polygonList)
+        {
+            List<Point> objectsPointsList = new List<Point>();
+
+            //create 2d representation of the polygons
+            foreach (Polygon polygon in polygonList)
+            {
+                foreach (Point3D point3D in polygon.polygonPoints)
+                {
+                    var point2D = obliqueProjection(point3D);
+                    objectsPointsList.Add(point2D);
+                }
+            }
+
+            //draw objects in prespective
+            drawPolygons(form, objectsPointsList);
+        }
+
+        //Oblique projection
+        public static Point obliqueProjection(Point3D Points)
+        {
+            double[,] obliqueMatrix = { 
+                { 1, 0, 0, 0 },
+                { 0, 1, 0, 0 },
+                { 0, 0, 0, 0 },
+                { 0, 0, 0, 1 }
+            };
+
+            double[,] pointMatrix = { 
+                {
+                    Points.x,
+                    Points.y,
+                    Points.z,
+                    1
+                }
+            };
+
+            double[,] result = multiplyMatrix(pointMatrix, obliqueMatrix);
+
+            return new Point((int)result[0, 0], (int)result[0, 1]);
         }
 
 
         public static void drawPolygons(Form1 form, List<Point> points)
         {
+            //form.graphics.Clear(Color.Gray);
             form.graphics.DrawPolygon(form.pen, points.ToArray());
             form.graphics.Dispose();
         }

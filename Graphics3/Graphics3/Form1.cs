@@ -21,7 +21,7 @@ namespace Graphics3
         public Graphics graphics;
         public Pen pen;
         Bitmap myBitmap; //TODO: change this name
-        //public Dictionary<string, Point3D[]> polygonList = null;
+
         public List<Polygon> polygonList = new List<Polygon>();
 
         public Form1()
@@ -37,40 +37,65 @@ namespace Graphics3
 
         private void init()
         {
-            graphics = Canvas.CreateGraphics();
-            pen = new Pen(Color.Black, 3);
+            if (graphics != null) {
+                graphics.Dispose();
+            }
+            else
+            {
+                graphics = Canvas.CreateGraphics();
+            }
+            
+            
+            pen = new Pen(Color.Black, 2);
 
             //init polygons
             var polygonPointsDict = new Dictionary<string, Point3D[]> {
-                //Cube polygons
+                //Cube polygons 
+                ///////////////TODO: there is an issue with diagonal lines
+                ///////////////////  either the drawing procces is off or the order of the points is bad.
                 { "polygon1", new[] {
                     new Point3D(350,150,150),
                     new Point3D(350,250,150),
                     new Point3D(450,250,150),
-                    new Point3D(450,150,150),                   
+                    new Point3D(450,150,150),
                     }
-                },
-                { "polygon2", new[] {
+                }
+                ,{ "polygon2", new[] {
                     new Point3D(350,150,250),
                     new Point3D(450,150,250),
                     new Point3D(450,250,250),
                     new Point3D(350,250,250)
                     }
-                },
-                { "polygon3", new[] {
+                }
+                ,{ "polygon3", new[] {
                     new Point3D(350,150,150),
                     new Point3D(350,150,250),
                     new Point3D(350,250,250),
                     new Point3D(350,250,150)
                     }
-                },
-                { "polygon4", new[] {
-                    new Point3D(450,150,150),
-                    new Point3D(450,250,150),
+                }
+                ,{ "polygon4", new[] {
                     new Point3D(450,250,250),
-                    new Point3D(450,150,250)
+                    new Point3D(450,150,250),
+                    new Point3D(450,150,150),
+                    new Point3D(450,250,150),   
                     }
                 }
+                ,{ "polygon5", new[] {
+                    new Point3D(350,150,250),
+                    new Point3D(350,150,150),
+                    new Point3D(450,150,150),
+                    new Point3D(450,150,250),
+                    }
+                }
+                ,{ "polygon6", new[] {
+                    new Point3D(350,250,250),
+                    new Point3D(450,250,250),
+                    new Point3D(450,250,150),
+                    new Point3D(350,250,150),
+                    }
+                }
+
                 //TODO: add Pyramid polygons
             };
             
@@ -93,25 +118,22 @@ namespace Graphics3
         */
         private void drawButton_Click(object sender, EventArgs e)
         {
-            //graphics = e.Graphics
-            //Point[] points = { new Point(100, 100), new Point(200, 100), new Point(400, 200) };
-            //graphics.DrawPolygon(pen, points);
-            //graphics.Dispose();
-
             Draw3d.drawPrespective(this, this.polygonList);
-            
         }
 
-
-        //private void drawPolygons(Point[] points)
-        //{
-        //    graphics.DrawPolygon(pen, points);
-        //    graphics.Dispose();
-        //}
-
-        private void button1_Click(object sender, EventArgs e)
+        private void drawParallelClicked(object sender, EventArgs e)
         {
+            Draw3d.drawParallel(this, this.polygonList);
+        }
 
+        private void drawObliqueClicked(object sender, EventArgs e)
+        {
+            Draw3d.drawOblique(this, this.polygonList);
+        }
+
+        public void clearScreen()
+        {
+            init();
         }
     }
 }
