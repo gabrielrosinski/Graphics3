@@ -26,10 +26,12 @@ namespace Graphics3
                     var point2D = perspectiveProjection(point3D);   //returns point2D
                     objectsPointsList.Add(point2D);
                 }
-            }
 
-            //draw objects in prespective
-            drawPolygons(form, objectsPointsList);
+                //draw objects in prespective
+                drawPolygons(form, objectsPointsList);
+                objectsPointsList = new List<Point>();
+
+            }
         }
 
         //Prespective projection 
@@ -70,10 +72,11 @@ namespace Graphics3
                     var point2D = parallelProjection(point3D, 90.0);
                     objectsPointsList.Add(point2D);
                 }
-            }
 
-            //draw objects in prespective
-            drawPolygons(form, objectsPointsList);
+                //draw objects in prespective
+                drawPolygons(form, objectsPointsList);
+                objectsPointsList = new List<Point>();
+            }
         }
 
         //Parallel projection
@@ -116,10 +119,11 @@ namespace Graphics3
                     var point2D = obliqueProjection(point3D);
                     objectsPointsList.Add(point2D);
                 }
-            }
 
-            //draw objects in prespective
-            drawPolygons(form, objectsPointsList);
+                //draw objects in prespective
+                drawPolygons(form, objectsPointsList);
+                objectsPointsList = new List<Point>();
+            }
         }
 
         //Oblique projection
@@ -149,9 +153,7 @@ namespace Graphics3
 
         public static void drawPolygons(Form1 form, List<Point> points)
         {
-            //form.graphics.Clear(Color.Gray);
             form.graphics.DrawPolygon(form.pen, points.ToArray());
-            form.graphics.Dispose();
         }
 
 
