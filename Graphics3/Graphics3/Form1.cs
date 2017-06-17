@@ -20,9 +20,12 @@ namespace Graphics3
         
         public Graphics graphics;
         public Pen pen;
+        public List<Polygon> polygonList = new List<Polygon>();
+        public Point3D centerPoint = null;
+
         Bitmap myBitmap; //TODO: change this name
 
-        public List<Polygon> polygonList = new List<Polygon>();
+        
 
         public Form1()
         {
@@ -45,12 +48,11 @@ namespace Graphics3
             
             
             pen = new Pen(Color.Black, 2);
-
+            this.centerPoint = new Point3D(this.Canvas.Size.Width / 2, this.Canvas.Size.Height / 2, 350);
             //init polygons
             var polygonPointsDict = new Dictionary<string, Point3D[]> {
                 //Cube polygons 
-                ///////////////TODO: there is an issue with diagonal lines
-                ///////////////////  either the drawing procces is off or the order of the points is bad.
+
                 { "polygon1", new[] {
                     new Point3D(350,150,150),
                     new Point3D(350,250,150),
@@ -97,8 +99,6 @@ namespace Graphics3
                 //TODO: add Pyramid polygons
             };
             
-
-
             //Create polygons from points3D arraya
             foreach (string key in polygonPointsDict.Keys)
             {
@@ -106,14 +106,10 @@ namespace Graphics3
 
                 polygonList.Add(new Polygon(pointsArray));
             }
+
+
         }
 
-        /*TODO: 
-            1. add button to clear / reset screen
-            2. add button to scale up
-            3. add button to scale down
-            4. add move objects
-        */
         private void drawButton_Click(object sender, EventArgs e)
         {
             clearScreen();
@@ -159,6 +155,16 @@ namespace Graphics3
             //{
             //    e.Handled = true;
             //}
+        }
+
+        private void scaleUpBtn_Click(object sender, EventArgs e)
+        {
+            Draw3d.scale(this, this.polygonList, 1.2);
+        }
+
+        private void Canvas_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

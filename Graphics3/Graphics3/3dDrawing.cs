@@ -154,6 +154,43 @@ namespace Graphics3
         }
 
 
+
+
+
+        //Transformations
+
+        public static void scale(Form1 form, List<Polygon> polygonList, double scaleFactor)
+        {
+            //move objects to 0
+            moveObjectsToZero(form, polygonList);
+
+
+            //scale 
+
+            //move objects to center
+        }
+
+        //Utilties
+        private static void moveObjectsToZero(Form1 form, List<Polygon> polygonList)
+        {
+            Point3D centerPoint = form.centerPoint;
+
+            //create 2d representation of the polygons
+            foreach (Polygon polygon in polygonList)
+            {
+                for (int i = 0; i < polygon.polygonPoints.Length; ++i)
+                {
+                    Point3D point3D = polygon.polygonPoints[i];
+                    point3D.x += -centerPoint.x;
+                    point3D.y += -centerPoint.y;
+                    point3D.z += -centerPoint.z;
+
+                    polygon.polygonPoints[i] = point3D;
+                }
+            }
+        }
+
+
         public static void drawPolygons(Form1 form, List<Point> points)
         {
             form.graphics.DrawPolygon(form.pen, points.ToArray());

@@ -37,6 +37,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.parallelProjectionAngle_text = new System.Windows.Forms.TextBox();
             this.help_button = new System.Windows.Forms.Button();
+            this.scaleUpBtn = new System.Windows.Forms.Button();
+            this.scaleDownBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,10 +60,11 @@
             this.Canvas.Size = new System.Drawing.Size(1166, 948);
             this.Canvas.TabIndex = 2;
             this.Canvas.TabStop = false;
+            this.Canvas.Click += new System.EventHandler(this.Canvas_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 143);
+            this.button1.Location = new System.Drawing.Point(12, 184);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 32);
             this.button1.TabIndex = 3;
@@ -71,7 +74,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 256);
+            this.button2.Location = new System.Drawing.Point(12, 128);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 50);
             this.button2.TabIndex = 4;
@@ -100,7 +103,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 182);
+            this.label1.Location = new System.Drawing.Point(13, 223);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 7;
@@ -108,7 +111,7 @@
             // 
             // parallelProjectionAngle_text
             // 
-            this.parallelProjectionAngle_text.Location = new System.Drawing.Point(103, 182);
+            this.parallelProjectionAngle_text.Location = new System.Drawing.Point(103, 223);
             this.parallelProjectionAngle_text.MaxLength = 3;
             this.parallelProjectionAngle_text.Name = "parallelProjectionAngle_text";
             this.parallelProjectionAngle_text.Size = new System.Drawing.Size(69, 20);
@@ -125,12 +128,33 @@
             this.help_button.Text = "Help";
             this.help_button.UseVisualStyleBackColor = true;
             // 
+            // scaleUpBtn
+            // 
+            this.scaleUpBtn.Location = new System.Drawing.Point(16, 287);
+            this.scaleUpBtn.Name = "scaleUpBtn";
+            this.scaleUpBtn.Size = new System.Drawing.Size(75, 23);
+            this.scaleUpBtn.TabIndex = 10;
+            this.scaleUpBtn.Text = "Scale Up";
+            this.scaleUpBtn.UseVisualStyleBackColor = true;
+            this.scaleUpBtn.Click += new System.EventHandler(this.scaleUpBtn_Click);
+            // 
+            // scaleDownBtn
+            // 
+            this.scaleDownBtn.Location = new System.Drawing.Point(97, 287);
+            this.scaleDownBtn.Name = "scaleDownBtn";
+            this.scaleDownBtn.Size = new System.Drawing.Size(75, 23);
+            this.scaleDownBtn.TabIndex = 11;
+            this.scaleDownBtn.Text = "Scale Down";
+            this.scaleDownBtn.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(1373, 972);
+            this.Controls.Add(this.scaleDownBtn);
+            this.Controls.Add(this.scaleUpBtn);
             this.Controls.Add(this.help_button);
             this.Controls.Add(this.parallelProjectionAngle_text);
             this.Controls.Add(this.label1);
@@ -159,6 +183,8 @@
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox parallelProjectionAngle_text;
         private System.Windows.Forms.Button help_button;
+        private System.Windows.Forms.Button scaleUpBtn;
+        private System.Windows.Forms.Button scaleDownBtn;
     }
 }
 
