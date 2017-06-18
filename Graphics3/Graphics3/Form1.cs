@@ -22,7 +22,8 @@ namespace Graphics3
         public Pen pen;
         public List<Polygon> polygonList = new List<Polygon>();
         public Point3D centerPoint = null;
-
+        public Point3D holderCenter = null;
+        public int lastClicked = 0;
         Bitmap myBitmap; //TODO: change this name
 
         
@@ -106,30 +107,35 @@ namespace Graphics3
 
                 polygonList.Add(new Polygon(pointsArray));
             }
-
+            centerPoint = new Point3D(polygonList[0].polygonPoints[0].x, polygonList[0].polygonPoints[0].y, polygonList[0].polygonPoints[0].z);
 
         }
 
         private void drawButton_Click(object sender, EventArgs e)
         {
+            lastClicked = 1;
             clearScreen();
             Draw3d.drawPrespective(this, this.polygonList);
         }
 
         private void drawParallelClicked(object sender, EventArgs e)
         {
+            lastClicked = 2;
+            if (parallelProjectionAngle_text.Text == String.Empty) return;
             clearScreen();
             Draw3d.drawParallel(this, this.polygonList);
         }
 
         private void drawObliqueClicked(object sender, EventArgs e)
         {
+            lastClicked = 3;
             clearScreen();
             Draw3d.drawOblique(this, this.polygonList);
         }
 
         public void clearScreen()
         {
+            lastClicked = 0;
             init();
             graphics.Clear(Color.Gray);
         }
