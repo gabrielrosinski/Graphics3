@@ -8,13 +8,13 @@ namespace Graphics3
 {
     public class Point3D 
     {
-        public int x { get; set; }
-        public int y { get; set; }
-        public int z { get; set; }
+        public Double x { get; set; }
+        public Double y { get; set; }
+        public Double z { get; set; }
 
         public Point3D() { }
 
-        public Point3D(int x, int y, int z)
+        public Point3D(Double x, Double y, Double z)
         {
             this.x = x;
             this.y = y;
