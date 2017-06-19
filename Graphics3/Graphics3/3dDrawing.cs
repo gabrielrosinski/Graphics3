@@ -18,6 +18,8 @@ namespace Graphics3
         {
             List<Point> objectsPointsList = new List<Point>();
 
+            form.clearScreen();
+
             //create 2d representation of the polygons
             foreach (Polygon polygon in polygonList)
             {
@@ -64,6 +66,8 @@ namespace Graphics3
         {
             List<Point> objectsPointsList = new List<Point>();          
             int angle = Convert.ToInt32(form.parallelProjectionAngle_text.Text);
+
+            form.clearScreen();
 
             //create 2d representation of the polygons
             foreach (Polygon polygon in polygonList)
@@ -113,6 +117,8 @@ namespace Graphics3
         {
             List<Point> objectsPointsList = new List<Point>();
 
+            form.clearScreen();
+
             //create 2d representation of the polygons
             foreach (Polygon polygon in polygonList)
             {
@@ -160,14 +166,63 @@ namespace Graphics3
 
         public static void scale(Form1 form, List<Polygon> polygonList, double scaleFactor)
         {
-            Point3D center = new Point3D(form.centerPoint.x, form.centerPoint.y, form.centerPoint.z);
-            //move objects to 0
-            moveObjectsToZero(form, polygonList);
+            List<Polygon> newPoligonList = new List<Polygon>();
+            Polygon newPolygon;// = new Polygon();
+            Point3D point;
+            List<Point3D> tempPointList;// = new List<Point3D>();
 
-            //scale 
+            double[] distance = {
+                form.centerPoint.x,
+                form.centerPoint.y,
+                form.centerPoint.z
+            };
 
-            //move objects to center
+            double[,] scaleMatrix = { 
+                { scaleFactor, 0, 0, 0 },
+                { 0, scaleFactor, 0, 0 },
+                { 0, 0, scaleFactor, 0 },
+                {
+                    (1 - scaleFactor) * distance[0],
+                    (1 - scaleFactor) * distance[1],
+                    (1 - scaleFactor) * distance[2],
+                    1
+                }
+            };
 
+            foreach (Polygon polygon in polygonList)
+            {
+                newPolygon = new Polygon();
+                tempPointList = new List<Point3D>();
+
+                foreach (Point3D P in polygon.polygonPoints)
+                {
+                    double[,] array = { 
+                        {
+                            P.x,
+                            P.y,
+                            P.z,
+                            1
+                        }
+                    };
+
+                    array = multiplyMatrix(array, scaleMatrix);
+                    point = new Point3D();
+
+                    point.x = (int)array[0, 0];
+                    point.y = (int)array[0, 1];
+                    point.z = (int)array[0, 2];
+                    tempPointList.Add(point);
+                }
+
+
+                newPolygon.polygonPoints = tempPointList.ToArray();
+                newPoligonList.Add(newPolygon);
+
+            }
+
+            form.polygonList = newPoligonList;
+            form.clearScreen();
+            form.tempPaint();
         }
 
         public static void rotateZAxis(Form1 form, List<Polygon> polygonList, double angle)

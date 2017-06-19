@@ -49,7 +49,12 @@ namespace Graphics3
             
             
             pen = new Pen(Color.Black, 2);
+
+            //clear the polygon list 
+            polygonList = new List<Polygon>();
+
             this.centerPoint = new Point3D(this.Canvas.Size.Width / 2, this.Canvas.Size.Height / 2, 350);
+
             //init polygons
             var polygonPointsDict = new Dictionary<string, Point3D[]> {
                 //Cube polygons 
@@ -97,7 +102,31 @@ namespace Graphics3
                     }
                 }
 
-                //TODO: add Pyramid polygons
+                //Pyramid polygons
+                ,{ "polygon7", new[] {
+                    new Point3D(550, 250, 150),
+                    new Point3D(650, 250, 150),
+                    new Point3D(600, 150, 200)
+                    }
+                }
+                ,{ "polygon8", new[] {
+                    new Point3D(550, 250, 250),
+                    new Point3D(600, 150, 200),
+                    new Point3D(650, 250, 250)
+                    }
+                }
+                ,{ "polygon9", new[] {
+                    new Point3D(550, 250, 250),
+                    new Point3D(550, 250, 150),
+                    new Point3D(600, 150, 200)
+                    }
+                }
+                ,{ "polygon10", new[] {
+                    new Point3D(650, 250, 250),
+                    new Point3D(600, 150, 200),
+                    new Point3D(650, 250, 150)
+                    }
+                }
             };
             
             //Create polygons from points3D arraya
@@ -132,30 +161,30 @@ namespace Graphics3
 
         private void drawButton_Click(object sender, EventArgs e)
         {
-            lastClicked = 1;
-            clearScreen();
+            this.lastClicked = 1;
+            //clearScreen();
             Draw3d.drawPrespective(this, this.polygonList);
         }
 
         private void drawParallelClicked(object sender, EventArgs e)
         {
             if (parallelProjectionAngle_text.Text == String.Empty) return;
-            lastClicked = 2;
-            clearScreen();
+            this.lastClicked = 2;
+            //clearScreen();
             Draw3d.drawParallel(this, this.polygonList);
         }
 
         private void drawObliqueClicked(object sender, EventArgs e)
         {
-            lastClicked = 3;
-            clearScreen();
+            this.lastClicked = 3;
+            //clearScreen();
             Draw3d.drawOblique(this, this.polygonList);
         }
 
         public void clearScreen()
         {
-            lastClicked = 0;
-            init();
+            //this.lastClicked = 0;
+            //init();
             graphics.Clear(Color.Gray);
         }
 
@@ -185,6 +214,11 @@ namespace Graphics3
         private void scaleUpBtn_Click(object sender, EventArgs e)
         {
             Draw3d.scale(this, this.polygonList, 1.2);
+        }
+
+        private void scaleDownBtn_Click(object sender, EventArgs e)
+        {
+            Draw3d.scale(this, this.polygonList, 0.8);
         }
 
         private void Canvas_Click(object sender, EventArgs e)
@@ -225,21 +259,21 @@ namespace Graphics3
             tempPaint();
         }
 
-        private void tempPaint()
+        public void tempPaint()
         {
             if (this.lastClicked == 1)
             {
-                this.clearScreen();
+                //this.clearScreen();
                 Draw3d.drawPrespective(this, this.polygonList);
             }
             else if (this.lastClicked == 2)
             {
-                this.clearScreen();
+                //this.clearScreen();
                 Draw3d.drawParallel(this, this.polygonList);
             }
             else if (this.lastClicked == 3)
             {
-                clearScreen();
+                //clearScreen();
                 Draw3d.drawOblique(this, this.polygonList);
             }
         }
@@ -248,5 +282,7 @@ namespace Graphics3
         {
 
         }
+
+
     }
 }
