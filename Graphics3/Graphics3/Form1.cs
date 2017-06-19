@@ -107,27 +107,8 @@ namespace Graphics3
 
                 polygonList.Add(new Polygon(pointsArray));
             }
-            // centerPoint = new Point3D(polygonList[0].polygonPoints[0].x, polygonList[0].polygonPoints[0].y, polygonList[0].polygonPoints[0].z);
-            Point3D min = new Point3D();
-            min.x = double.MaxValue;
-            min.y = double.MaxValue;
-            min.z = double.MaxValue;
-            Point3D max = new Point3D();
-            max.x = double.MinValue;
-            max.y = double.MinValue;
-            max.z = double.MinValue;
-            for (int i = 0; i< polygonList.Count; ++i)
-                for(int j = 0; j< polygonList[i].polygonPoints.Length; ++j)
-                {
-                    if (polygonList[i].polygonPoints[j].x < min.x) min.x = polygonList[i].polygonPoints[j].x;
-                    if (polygonList[i].polygonPoints[j].x > max.x) max.x = polygonList[i].polygonPoints[j].x;
-                    if (polygonList[i].polygonPoints[j].y < min.y) min.y = polygonList[i].polygonPoints[j].y;
-                    if (polygonList[i].polygonPoints[j].y > max.y) max.y = polygonList[i].polygonPoints[j].y;
-                    if (polygonList[i].polygonPoints[j].z < min.z) min.z = polygonList[i].polygonPoints[j].z;
-                    if (polygonList[i].polygonPoints[j].z > max.z) max.z = polygonList[i].polygonPoints[j].z;
-                }
-
-            centerPoint = new Point3D((max.x - min.x)/2, (max.y - min.y) / 2,(max.z - min.z)/ 2);
+            //centerPoint = new Point3D(polygonList[0].polygonPoints[0].x, polygonList[0].polygonPoints[0].y, polygonList[0].polygonPoints[0].z);
+            Draw3d.getCenter(this);
         }
 
         private void drawButton_Click(object sender, EventArgs e)
@@ -196,36 +177,36 @@ namespace Graphics3
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
-            Draw3d.moveObjectsToZero(this, polygonList);
+            //Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateYAxis(this, polygonList, int.Parse(rotationAngle.Text));
-            Draw3d.moveBackObject(center, this, polygonList);
-            clearScreen();
-            tempPaint();
+           // Draw3d.moveBackObject(center, this, polygonList);
+          //  clearScreen();
+           // tempPaint();
         }
 
         private void rotateXButton_Click(object sender, EventArgs e)
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
-            Draw3d.moveObjectsToZero(this, polygonList);
+            //Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateXAxis(this, polygonList, int.Parse(rotationAngle.Text));
-            Draw3d.moveBackObject(center, this, polygonList);
-            clearScreen();
-            tempPaint();
+           // Draw3d.moveBackObject(center, this, polygonList);
+          //  clearScreen();
+          //  tempPaint();
         }
 
         private void rotateZButton_Click(object sender, EventArgs e)
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
-            Draw3d.moveObjectsToZero(this, polygonList);
+           // Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateZAxis(this, polygonList, int.Parse(rotationAngle.Text));
-            Draw3d.moveBackObject(center, this, polygonList);
-            clearScreen();
-            tempPaint();
+           // Draw3d.moveBackObject(center, this, polygonList);
+          ///  clearScreen();
+          //  tempPaint();
         }
 
-        private void tempPaint()
+        public void tempPaint()
         {
             if (this.lastClicked == 1)
             {
