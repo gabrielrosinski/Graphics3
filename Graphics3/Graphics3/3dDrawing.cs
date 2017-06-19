@@ -249,6 +249,22 @@ namespace Graphics3
                 form.centerPoint.x = form.centerPoint.x * cos - form.centerPoint.y * sin;
                 form.centerPoint.y = form.centerPoint.x * sin + form.centerPoint.y * cos;
             }
+
+            if (form.lastClicked == 1)
+            {
+                form.clearScreen();
+                drawPrespective(form, form.polygonList);
+            }
+            else if (form.lastClicked == 2)
+            {
+                form.clearScreen();
+                drawParallel(form, form.polygonList);
+            }
+            else if (form.lastClicked == 3)
+            {
+                form.clearScreen();
+                drawOblique(form, form.polygonList);
+            }
         }
 
         public static void rotateYAxis(Form1 form, List<Polygon> polygonList, double angle)
@@ -275,6 +291,22 @@ namespace Graphics3
                 form.centerPoint.z = form.centerPoint.z * cos - form.centerPoint.x * sin;
                 form.centerPoint.x = form.centerPoint.z * sin + form.centerPoint.x * cos;
             }
+
+            if (form.lastClicked == 1)
+            {
+                form.clearScreen();
+                drawPrespective(form, form.polygonList);
+            }
+            else if (form.lastClicked == 2)
+            {
+                form.clearScreen();
+                drawParallel(form, form.polygonList);
+            }
+            else if (form.lastClicked == 3)
+            {
+                form.clearScreen();
+                drawOblique(form, form.polygonList);
+            }
         }
 
         public static void rotateXAxis(Form1 form, List<Polygon> polygonList, double angle)
@@ -286,20 +318,35 @@ namespace Graphics3
             double sin = Math.Sin(angleInRad);
             //double cos = Math.Cos(angle);
             //double sin = Math.Sin(angle);
-
+            form.centerPoint.z = form.centerPoint.y * cos - form.centerPoint.z * sin;
+            form.centerPoint.y = form.centerPoint.y * sin + form.centerPoint.z * cos;
             foreach (Polygon polygon in polygonList)
             {
                 for (int i = 0; i < polygon.polygonPoints.Length; ++i)
                 {
                     Point3D point3D = polygon.polygonPoints[i];
-                    point3D.z = point3D.y * cos - point3D.z * sin;
-                    point3D.y = point3D.y * sin + point3D.z * cos;
-                    //point3D.z = -centerPoint.z;
+                    point3D.z = ((point3D.y - form.centerPoint.y)* cos) - (((point3D.z - form.centerPoint.z) * sin)+ form.centerPoint.z);
+                    point3D.y = ((point3D.y - form.centerPoint.y) * sin) + (((point3D.z - form.centerPoint.z) * cos) + form.centerPoint.z);
+                   // point3D.x = -centerPoint.z;
 
                     polygon.polygonPoints[i] = point3D;
                 }
-                form.centerPoint.z = form.centerPoint.y * cos - form.centerPoint.z * sin;
-                form.centerPoint.y = form.centerPoint.y * sin + form.centerPoint.z * cos;
+
+            }
+            if (form.lastClicked == 1)
+            {
+                form.clearScreen();
+                drawPrespective(form, form.polygonList);
+            }
+            else if (form.lastClicked == 2)
+            {
+                form.clearScreen();
+                drawParallel(form, form.polygonList);
+            }
+            else if (form.lastClicked == 3)
+            {
+                form.clearScreen();
+                drawOblique(form, form.polygonList);
             }
         }
 
@@ -320,31 +367,16 @@ namespace Graphics3
                     polygon.polygonPoints[i] = point3D;
                 }
             }
+            form.holderCenter = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
             form.centerPoint.x = 0;
             form.centerPoint.y = 0;
-            form.holderCenter = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
-            //if(form.lastClicked == 1)
-            //{
-            //    form.clearScreen();
-            //    drawPrespective(form, form.polygonList);
-            //}
-            //else if(form.lastClicked == 2)
-            //{
-            //    form.clearScreen();
-            //    drawParallel(form, form.polygonList);
-            //}
-            //else if (form.lastClicked == 3)
-            //{
-            //    form.clearScreen();
-            //    drawOblique(form, form.polygonList);
-            //}
+            form.centerPoint.z = 0;
 
-           // moveBackObject(centerPoint, form, polygonList);
         }
 
         public static void moveBackObject(Point3D originalCenter, Form1 form, List<Polygon> polygonList)
         {
-            Point3D calculate = new Point3D(originalCenter.x, originalCenter.y, originalCenter.z);
+            Point3D calculate = new Point3D(form.holderCenter.x, form.holderCenter.y, form.holderCenter.z);
             //create 2d representation of the polygons
             foreach (Polygon polygon in polygonList)
             {
@@ -358,8 +390,9 @@ namespace Graphics3
                     polygon.polygonPoints[i] = point3D;
                 }
             }
-            form.centerPoint.x = originalCenter.x;
-            form.centerPoint.y = originalCenter.y;
+            form.centerPoint.x = form.holderCenter.x;
+            form.centerPoint.y = form.holderCenter.y;
+            form.centerPoint.z = form.holderCenter.z;
             form.holderCenter = null;
             //if (form.lastClicked == 1)
             //{
@@ -378,29 +411,42 @@ namespace Graphics3
             //}
         }
 
-        //private static void moveObjectsToZero(Form1 form, List<Polygon> polygonList)
-        //{
-        //    Point3D centerPoint = form.centerPoint;
+        public static void getCenter(Form1 form)
+        {
+            List<Point> objectsPointsList = new List<Point>();
+            Point3D min = new Point3D();
+            min.x = double.MaxValue;
+            min.y = double.MaxValue;
+            min.z = double.MaxValue;
+            Point3D max = new Point3D();
+            max.x = double.MinValue;
+            max.y = double.MinValue;
+            max.z = double.MinValue;
+            //create 2d representation of the polygons
+            foreach (Polygon polygon in form.polygonList)
+            {
+                foreach (Point3D point3D in polygon.polygonPoints)
+                {
+                    var point2D = perspectiveProjection(point3D);   //returns point2D
 
-        //    //create 2d representation of the polygons
-        //    foreach (Polygon polygon in polygonList)
-        //    {
-        //        for (int i = 0; i < polygon.polygonPoints.Length; ++i)
-        //        {
-        //            Point3D point3D = polygon.polygonPoints[i];
-        //            point3D.x += -centerPoint.x;
-        //            point3D.y += -centerPoint.y;
-        //           // point3D.z += -centerPoint.z;
+                    if (point3D.x < min.x) min.x = point3D.x;
+                    if (point3D.x > max.x) max.x = point3D.x;
+                    if (point3D.y < min.y) min.y = point3D.y;
+                    if (point3D.y > max.y) max.y = point3D.y;
+                    if (point3D.z < min.z) min.z = point3D.z;
+                    if (point3D.z > max.z) max.z = point3D.z;
 
-        //            polygon.polygonPoints[i] = point3D;
-        //        }
-        //    }
-        //}
-
+                }
+                form.centerPoint = new Point3D(min.x+((max.x - min.x) / 2), min.y + ((max.y - min.y) / 2), min.z + ((max.z - min.z) / 2));
+            }
+        }
 
         public static void drawPolygons(Form1 form, List<Point> points)
         {
             form.graphics.DrawPolygon(form.pen, points.ToArray());
+            Rectangle rectangle1 = new Rectangle((int)form.centerPoint.x, (int)form.centerPoint.y, 4, 4);
+            form.graphics.DrawRectangle(Pens.Black, rectangle1);
+            form.graphics.FillRectangle(Brushes.Red, rectangle1);
         }
 
 
