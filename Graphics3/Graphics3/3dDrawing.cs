@@ -227,131 +227,82 @@ namespace Graphics3
 
         public static void rotateZAxis(Form1 form, List<Polygon> polygonList, double angle)
         {
+            getCenter(form);
             //    //get the angle in radians
-                double angleInRad = angle / 180.0 * Math.PI;
+                double angleInRad = angle * (180.0 / Math.PI);
             //    //pre calculate the cos and sin
             double cos = Math.Cos(angleInRad);
             double sin = Math.Sin(angleInRad);
-            //double cos = Math.Cos(angle);
-            //double sin = Math.Sin(angle);
-
+            form.centerPoint.z = form.centerPoint.y * cos - ((form.centerPoint.z * sin) + form.centerPoint.z);
+            form.centerPoint.y = form.centerPoint.y * sin + ((form.centerPoint.z * cos) + form.centerPoint.y);
+            form.centerPoint.x = form.centerPoint.z * sin + ((form.centerPoint.x * cos) + form.centerPoint.x);
             foreach (Polygon polygon in polygonList)
             {
                 for (int i = 0; i < polygon.polygonPoints.Length; ++i)
                 {
                     Point3D point3D = polygon.polygonPoints[i];
-                    point3D.x = point3D.x * cos - point3D.y * sin;
-                    point3D.y = point3D.x * sin + point3D.y * cos;
-                    //point3D.z = -centerPoint.z;
+                    point3D.x = (((point3D.x- form.centerPoint.x) * cos) - ((point3D.y- form.centerPoint.y) * sin)+ form.centerPoint.x);
+                    point3D.y = (((point3D.x- form.centerPoint.x) * sin) + ((point3D.y- form.centerPoint.y) * cos)+ form.centerPoint.y);
 
                     polygon.polygonPoints[i] = point3D;
                 }
 
             }
-            form.centerPoint.x = form.centerPoint.x * cos - form.centerPoint.y * sin;
-            form.centerPoint.y = form.centerPoint.x * sin + form.centerPoint.y * cos;
-            //if (form.lastClicked == 1)
-            //{
-            //    form.clearScreen();
-            //    drawPrespective(form, form.polygonList);
-            //}
-            //else if (form.lastClicked == 2)
-            //{
-            //    form.clearScreen();
-            //    drawParallel(form, form.polygonList);
-            //}
-            //else if (form.lastClicked == 3)
-            //{
-            //    form.clearScreen();
-            //    drawOblique(form, form.polygonList);
-            //}
+
         }
 
         public static void rotateYAxis(Form1 form, List<Polygon> polygonList, double angle)
         {
+            getCenter(form);
             //    //get the angle in radians
-            double angleInRad = angle / 180.0 * Math.PI;
+            double angleInRad = angle * (180.0 / Math.PI);
             //    //pre calculate the cos and sin
             double cos = Math.Cos(angleInRad);
             double sin = Math.Sin(angleInRad);
-            //double cos = Math.Cos(angle);
-            //double sin = Math.Sin(angle);
 
+            form.centerPoint.z = form.centerPoint.y * cos - ((form.centerPoint.z * sin) + form.centerPoint.z);
+            form.centerPoint.y = form.centerPoint.y * sin + ((form.centerPoint.z * cos) + form.centerPoint.y);
+            form.centerPoint.x = form.centerPoint.z * sin + ((form.centerPoint.x * cos) + form.centerPoint.x);
             foreach (Polygon polygon in polygonList)
             {
                 for (int i = 0; i < polygon.polygonPoints.Length; ++i)
                 {
                     Point3D point3D = polygon.polygonPoints[i];
-                    point3D.z = point3D.z * cos - point3D.x * sin;
-                    point3D.x = point3D.z * sin + point3D.x * cos;
-                    //point3D.z = -centerPoint.z;
+                    point3D.z = (((point3D.z- form.centerPoint.z) * cos) - ((point3D.x- form.centerPoint.x) * sin)+ form.centerPoint.z);
+                    point3D.x = (((point3D.z - form.centerPoint.z) * sin) + ((point3D.x- form.centerPoint.x) * cos)+ form.centerPoint.x);
 
                     polygon.polygonPoints[i] = point3D;
                 }
 
             }
-            form.centerPoint.z = form.centerPoint.z * cos - form.centerPoint.x * sin;
-            form.centerPoint.x = form.centerPoint.z * sin + form.centerPoint.x * cos;
-            //if (form.lastClicked == 1)
-            //{
-            //    form.clearScreen();
-            //    drawPrespective(form, form.polygonList);
-            //}
-            //else if (form.lastClicked == 2)
-            //{
-            //    form.clearScreen();
-            //    drawParallel(form, form.polygonList);
-            //}
-            //else if (form.lastClicked == 3)
-            //{
-            //    form.clearScreen();
-            //    drawOblique(form, form.polygonList);
-            //}
+
         }
 
         public static void rotateXAxis(Form1 form, List<Polygon> polygonList, double angle)
         {
+            getCenter(form);
             //    //get the angle in radians
-            double angleInRad = angle / 180.0 * Math.PI;
+            double angleInRad = angle * (180.0 / Math.PI);
             //    //pre calculate the cos and sin
             double cos = Math.Cos(angleInRad);
             double sin = Math.Sin(angleInRad);
-            //double cos = Math.Cos(angle);
-            //double sin = Math.Sin(angle);
-
+            form.centerPoint.z = form.centerPoint.y * cos - ((form.centerPoint.z * sin) + form.centerPoint.z);
+            form.centerPoint.y = form.centerPoint.y * sin + ((form.centerPoint.z * cos) + form.centerPoint.y);
+            form.centerPoint.x = form.centerPoint.z * sin + ((form.centerPoint.x * cos) + form.centerPoint.x);
             foreach (Polygon polygon in polygonList)
             {
                 for (int i = 0; i < polygon.polygonPoints.Length; ++i)
                 {
                     Point3D point3D = polygon.polygonPoints[i];
-                    //point3D.z = ((point3D.y - form.centerPoint.y)* cos) - (((point3D.z - form.centerPoint.z) * sin)+ form.centerPoint.z);
-                    //point3D.y = ((point3D.y - form.centerPoint.y) * sin) + (((point3D.z - form.centerPoint.z) * cos) + form.centerPoint.z);
-                    point3D.z = ((point3D.y) * cos) - (((point3D.z) * sin));
-                    point3D.y = ((point3D.y) * sin) + (((point3D.z) * cos));
-                    // point3D.x = -centerPoint.z;
+                    point3D.z = ((point3D.y - form.centerPoint.y) * cos) - (((point3D.z - form.centerPoint.z) * sin) + form.centerPoint.z);
+                    point3D.y = ((point3D.y - form.centerPoint.y) * sin) + (((point3D.z - form.centerPoint.z) * cos)+ form.centerPoint.y);
 
                     polygon.polygonPoints[i] = point3D;
                 }
 
 
             }
-            form.centerPoint.z = form.centerPoint.y * cos - form.centerPoint.z * sin;
-            form.centerPoint.y = form.centerPoint.y * sin + form.centerPoint.z * cos;
-            //if (form.lastClicked == 1)
-            //{
-            //    form.clearScreen();
-            //    drawPrespective(form, form.polygonList);
-            //}
-            //else if (form.lastClicked == 2)
-            //{
-            //    form.clearScreen();
-            //    drawParallel(form, form.polygonList);
-            //}
-            //else if (form.lastClicked == 3)
-            //{
-            //    form.clearScreen();
-            //    drawOblique(form, form.polygonList);
-            //}
+
         }
 
         //Utilties

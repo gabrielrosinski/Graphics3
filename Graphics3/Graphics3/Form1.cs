@@ -211,6 +211,7 @@ namespace Graphics3
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
+            holderCenter = center;
             Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateYAxis(this, polygonList, int.Parse(rotationAngle.Text));
             Draw3d.moveBackObject(center, this, polygonList);
@@ -222,6 +223,7 @@ namespace Graphics3
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
+            holderCenter = center;
             Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateXAxis(this, polygonList, int.Parse(rotationAngle.Text));
             Draw3d.moveBackObject(center, this, polygonList);
@@ -233,6 +235,7 @@ namespace Graphics3
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
+            holderCenter = center;
             Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateZAxis(this, polygonList, int.Parse(rotationAngle.Text));
             Draw3d.moveBackObject(center, this, polygonList);
