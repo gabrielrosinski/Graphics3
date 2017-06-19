@@ -211,33 +211,33 @@ namespace Graphics3
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
-            //Draw3d.moveObjectsToZero(this, polygonList);
+            Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateYAxis(this, polygonList, int.Parse(rotationAngle.Text));
-           // Draw3d.moveBackObject(center, this, polygonList);
-          //  clearScreen();
-           // tempPaint();
+            Draw3d.moveBackObject(center, this, polygonList);
+            clearScreen();
+            tempPaint();
         }
 
         private void rotateXButton_Click(object sender, EventArgs e)
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
-            //Draw3d.moveObjectsToZero(this, polygonList);
+            Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateXAxis(this, polygonList, int.Parse(rotationAngle.Text));
-           // Draw3d.moveBackObject(center, this, polygonList);
-          //  clearScreen();
-          //  tempPaint();
+            Draw3d.moveBackObject(center, this, polygonList);
+            clearScreen();
+            tempPaint();
         }
 
         private void rotateZButton_Click(object sender, EventArgs e)
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
-           // Draw3d.moveObjectsToZero(this, polygonList);
+            Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateZAxis(this, polygonList, int.Parse(rotationAngle.Text));
-           // Draw3d.moveBackObject(center, this, polygonList);
-          ///  clearScreen();
-          //  tempPaint();
+            Draw3d.moveBackObject(center, this, polygonList);
+            clearScreen();
+            tempPaint();
         }
 
         public void tempPaint()
