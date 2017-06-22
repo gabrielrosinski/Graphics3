@@ -19,18 +19,29 @@ namespace Graphics3
             List<Point> objectsPointsList = new List<Point>();
 
             form.clearScreen();
-
+            List<Point> Cordi = new List<Point>();
             //create 2d representation of the polygons
             foreach (Polygon polygon in polygonList)
             {
+                Cordi = new List<Point>();
                 foreach (Point3D point3D in polygon.polygonPoints)
                 {
                     var point2D = perspectiveProjection(point3D);   //returns point2D
                     objectsPointsList.Add(point2D);
+                    Cordi.Add(new Point(point2D.X, point2D.Y));
                 }
-
+                
+                if (form.BVisible.Checked)
+                {
+                    if (FullStruct(Cordi))
+                        drawPolygons(form, objectsPointsList);
+                }
+                else
+                {
+                    drawPolygons(form, objectsPointsList);
+                }
                 //draw objects in prespective
-                drawPolygons(form, objectsPointsList);
+               // drawPolygons(form, objectsPointsList);
                 objectsPointsList = new List<Point>();
 
             }
@@ -68,19 +79,29 @@ namespace Graphics3
             int angle = Convert.ToInt32(form.parallelProjectionAngle_text.Text);
 
             form.clearScreen();
-
+            List<Point> Cordi = new List<Point>();
             //create 2d representation of the polygons
             foreach (Polygon polygon in polygonList)
             {
+                Cordi = new List<Point>();
                 foreach (Point3D point3D in polygon.polygonPoints)
                 {
                     
                     var point2D = parallelProjection(point3D, angle);
                     objectsPointsList.Add(point2D);
+                    Cordi.Add(new Point(point2D.X, point2D.Y));
                 }
-
+                if (form.BVisible.Checked)
+                {
+                    if (FullStruct(Cordi))
+                        drawPolygons(form, objectsPointsList);
+                }
+                else
+                {
+                    drawPolygons(form, objectsPointsList);
+                }
                 //draw objects in prespective
-                drawPolygons(form, objectsPointsList);
+               // drawPolygons(form, objectsPointsList);
                 objectsPointsList = new List<Point>();
             }
         }
@@ -118,18 +139,28 @@ namespace Graphics3
             List<Point> objectsPointsList = new List<Point>();
 
             form.clearScreen();
-
+            List<Point> Cordi = new List<Point>();
             //create 2d representation of the polygons
             foreach (Polygon polygon in polygonList)
             {
+                Cordi = new List<Point>();
                 foreach (Point3D point3D in polygon.polygonPoints)
                 {
                     var point2D = obliqueProjection(point3D);
                     objectsPointsList.Add(point2D);
+                    Cordi.Add(new Point(point2D.X, point2D.Y));
                 }
-
+                if (form.BVisible.Checked)
+                {
+                    if (FullStruct(Cordi))
+                        drawPolygons(form, objectsPointsList);
+                }
+                else
+                {
+                    drawPolygons(form, objectsPointsList);
+                }
                 //draw objects in prespective
-                drawPolygons(form, objectsPointsList);
+              //  drawPolygons(form, objectsPointsList);
                 objectsPointsList = new List<Point>();
             }
         }
@@ -239,10 +270,10 @@ namespace Graphics3
                 {
                     Point3D point3D = polygon.polygonPoints[i];
                     Point3D point3D1 = polygon.polygonPoints[i];
-                    //point3D.x = ((((point3D.x- form.centerPoint.x) * cos) - (point3D.y- form.centerPoint.y) * sin)+ form.centerPoint.x);
-                    //point3D.y = ((((point3D.x- form.centerPoint.x) * sin) + (point3D.y- form.centerPoint.y) * cos)+ form.centerPoint.y);
-                    point3D.x = ((point3D.x * cos) - (point3D.y * sin));
-                    point3D.y = ((point3D1.x * sin) + (point3D1.y * cos));
+                    point3D.x = ((((point3D1.x- form.centerPoint.x) * cos) - (point3D1.y- form.centerPoint.y) * sin)+ form.centerPoint.x);
+                    point3D.y = ((((point3D1.x- form.centerPoint.x) * sin) + (point3D1.y- form.centerPoint.y) * cos)+ form.centerPoint.y);
+                   // point3D.x = ((point3D1.x * cos) - (point3D1.y * sin));
+                   // point3D.y = ((point3D1.x * sin) + (point3D1.y * cos));
                     polygon.polygonPoints[i] = point3D;
                 }
             }
@@ -263,15 +294,13 @@ namespace Graphics3
                 {
                     Point3D point3D = polygon.polygonPoints[i];
                     Point3D point3D1 = polygon.polygonPoints[i];
-                    //point3D.z = (((point3D.z- form.centerPoint.z) * cos) - ((point3D.x- form.centerPoint.x) * sin)+ form.centerPoint.z);
-                    //point3D.x = (((point3D.z - form.centerPoint.z) * sin) + ((point3D.x- form.centerPoint.x) * cos)+ form.centerPoint.x);
-                    point3D.z = ((point3D.z * cos) - (point3D.x * sin));
-                    point3D.x = ((point3D1.z * sin) + (point3D1.x * cos));
+                    point3D.z = (((point3D1.z- form.centerPoint.z) * cos) - ((point3D1.x- form.centerPoint.x) * sin)+ form.centerPoint.z);
+                    point3D.x = (((point3D1.z - form.centerPoint.z) * sin) + ((point3D1.x- form.centerPoint.x) * cos)+ form.centerPoint.x);
+                   // point3D.z = ((point3D.z * cos) - (point3D.x * sin));
+                    //point3D.x = ((point3D1.z * sin) + (point3D1.x * cos));
                     polygon.polygonPoints[i] = point3D;
                 }
-
             }
-
         }
 
         public static void rotateXAxis(Form1 form, List<Polygon> polygonList, double angle)
@@ -288,16 +317,13 @@ namespace Graphics3
                 {
                     Point3D point3D = polygon.polygonPoints[i];
                     Point3D point3D1 = polygon.polygonPoints[i];
-                    //point3D.z = (((point3D.y - form.centerPoint.y) * cos) - ((point3D.z - form.centerPoint.z) * sin) + form.centerPoint.z);
-                    //point3D.y = (((point3D.y - form.centerPoint.y) * sin) + ((point3D.z - form.centerPoint.z) * cos) + form.centerPoint.y);
-                    point3D.y = ((point3D.y * cos) - (point3D.z * sin));
-                    point3D.z = ((point3D1.y * sin) + (point3D1.z * cos));
+                    point3D.z = (((point3D1.y - form.centerPoint.y) * cos) - ((point3D1.z - form.centerPoint.z) * sin) + form.centerPoint.z);
+                    point3D.y = (((point3D1.y - form.centerPoint.y) * sin) + ((point3D1.z - form.centerPoint.z) * cos) + form.centerPoint.y);
+                   // point3D.y = ((point3D.y * cos) - (point3D.z * sin));
+                   // point3D.z = ((point3D1.y * sin) + (point3D1.z * cos));
                     polygon.polygonPoints[i] = point3D;
                 }
-
-
             }
-
         }
 
         //Utilties
@@ -305,7 +331,7 @@ namespace Graphics3
         {
             Point3D centerPoint = new Point3D(form.centerPoint.x, form.centerPoint.y, form.centerPoint.z);
             //create 2d representation of the polygons
-            form.holderCenter = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
+           // form.holderCenter = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
             foreach (Polygon polygon in polygonList)
             {
                 for (int i = 0; i < polygon.polygonPoints.Length; ++i)
@@ -325,7 +351,7 @@ namespace Graphics3
 
         public static void moveBackObject(Point3D originalCenter, Form1 form, List<Polygon> polygonList)
         {
-            Point3D calculate = new Point3D(form.holderCenter.x - form.centerPoint.x, form.holderCenter.y - form.centerPoint.y, form.holderCenter.z - form.centerPoint.z);
+            Point3D calculate = form.holderCenter;
             //create 2d representation of the polygons
             foreach (Polygon polygon in polygonList)
             {
@@ -342,7 +368,6 @@ namespace Graphics3
             form.centerPoint.x += calculate.x;
             form.centerPoint.y += calculate.y;
             form.centerPoint.z += calculate.z;
-            form.holderCenter = null;
         }
 
         public static void getCenter(Form1 form)
@@ -372,17 +397,35 @@ namespace Graphics3
 
                 }
                 form.centerPoint = new Point3D(min.x+((max.x - min.x) / 2), min.y + ((max.y - min.y) / 2), min.z + ((max.z - min.z) / 2));
+                form.holderCenter = form.centerPoint;
             }
         }
 
         public static void drawPolygons(Form1 form, List<Point> points)
         {
             form.graphics.DrawPolygon(form.pen, points.ToArray());
-            Rectangle rectangle1 = new Rectangle((int)form.centerPoint.x, (int)form.centerPoint.y, 4, 4);
-            form.graphics.DrawRectangle(Pens.Black, rectangle1);
-            form.graphics.FillRectangle(Brushes.Red, rectangle1);
+           /// Rectangle rectangle1 = new Rectangle((int)form.centerPoint.x, (int)form.centerPoint.y, 4, 4);
+            //form.graphics.DrawRectangle(Pens.Black, rectangle1);
+            //form.graphics.FillRectangle(Brushes.Red, rectangle1);
         }
 
+        public static bool FullStruct(List<Point> Points)
+        {
+            int x0, x1, x2, y0, y1, y2;
+            double Normal;
+
+            x0 = Points[0].X;
+            x1 = Points[1].X;
+            x2 = Points[2].X;
+            y0 = Points[0].Y;
+            y1 = Points[1].Y;
+            y2 = Points[2].Y;
+            Normal = ((x1 - x0) * (y0 - y2)) - ((y1 - y0) * (x0 - x2));
+            if (Normal <= 0)
+                return true;
+            else
+                return false;
+        }
 
         public static double[,] multiplyMatrix(double[,] pointMatrix, double[,] prespectiveMatrix)
         {

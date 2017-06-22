@@ -26,7 +26,6 @@ namespace Graphics3
         public int lastClicked = 0;
         Bitmap myBitmap; //TODO: change this name
 
-        
 
         public Form1()
         {
@@ -44,7 +43,7 @@ namespace Graphics3
             if (graphics != null) {
                 graphics.Dispose();
             }
-
+            BVisible.Checked = true;
             graphics = Canvas.CreateGraphics();
             
             
@@ -211,10 +210,10 @@ namespace Graphics3
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
-            holderCenter = center;
-            Draw3d.moveObjectsToZero(this, polygonList);
+           // holderCenter = center;
+           // Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateYAxis(this, polygonList, int.Parse(rotationAngle.Text));
-            Draw3d.moveBackObject(center, this, polygonList);
+           // Draw3d.moveBackObject(center, this, polygonList);
             clearScreen();
             tempPaint();
         }
@@ -223,10 +222,10 @@ namespace Graphics3
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
-            holderCenter = center;
-            Draw3d.moveObjectsToZero(this, polygonList);
+           // holderCenter = center;
+          //  Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateXAxis(this, polygonList, int.Parse(rotationAngle.Text));
-            Draw3d.moveBackObject(center, this, polygonList);
+           // Draw3d.moveBackObject(center, this, polygonList);
             clearScreen();
             tempPaint();
         }
@@ -235,10 +234,10 @@ namespace Graphics3
         {
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
-            holderCenter = center;
-            Draw3d.moveObjectsToZero(this, polygonList);
+          //  holderCenter = center;
+           // Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateZAxis(this, polygonList, int.Parse(rotationAngle.Text));
-            Draw3d.moveBackObject(center, this, polygonList);
+           // Draw3d.moveBackObject(center, this, polygonList);
             clearScreen();
             tempPaint();
         }
@@ -267,6 +266,9 @@ namespace Graphics3
 
         }
 
-
+        private void BVisible_CheckedChanged(object sender, EventArgs e)
+        {
+            tempPaint();
+        }
     }
 }

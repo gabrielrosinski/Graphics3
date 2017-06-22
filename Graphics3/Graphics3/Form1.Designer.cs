@@ -44,14 +44,16 @@
             this.rotateYButton = new System.Windows.Forms.Button();
             this.rotationAngle = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.BVisible = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.SuspendLayout();
             // 
             // drawButton
             // 
-            this.drawButton.Location = new System.Drawing.Point(12, 72);
+            this.drawButton.Location = new System.Drawing.Point(32, 172);
+            this.drawButton.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.drawButton.Name = "drawButton";
-            this.drawButton.Size = new System.Drawing.Size(160, 50);
+            this.drawButton.Size = new System.Drawing.Size(427, 119);
             this.drawButton.TabIndex = 1;
             this.drawButton.Text = "Perspective projection";
             this.drawButton.UseVisualStyleBackColor = true;
@@ -60,18 +62,20 @@
             // Canvas
             // 
             this.Canvas.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Canvas.Location = new System.Drawing.Point(195, 12);
+            this.Canvas.Location = new System.Drawing.Point(520, 29);
+            this.Canvas.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(1166, 948);
+            this.Canvas.Size = new System.Drawing.Size(3109, 2261);
             this.Canvas.TabIndex = 2;
             this.Canvas.TabStop = false;
             this.Canvas.Click += new System.EventHandler(this.Canvas_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 184);
+            this.button1.Location = new System.Drawing.Point(32, 439);
+            this.button1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 32);
+            this.button1.Size = new System.Drawing.Size(427, 76);
             this.button1.TabIndex = 3;
             this.button1.Text = "Parallel Projection";
             this.button1.UseVisualStyleBackColor = true;
@@ -79,9 +83,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 128);
+            this.button2.Location = new System.Drawing.Point(32, 305);
+            this.button2.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(160, 50);
+            this.button2.Size = new System.Drawing.Size(427, 119);
             this.button2.TabIndex = 4;
             this.button2.Text = "Oblique projection";
             this.button2.UseVisualStyleBackColor = true;
@@ -89,18 +94,20 @@
             // 
             // exit_button
             // 
-            this.exit_button.Location = new System.Drawing.Point(2, 934);
+            this.exit_button.Location = new System.Drawing.Point(5, 2227);
+            this.exit_button.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.exit_button.Name = "exit_button";
-            this.exit_button.Size = new System.Drawing.Size(172, 23);
+            this.exit_button.Size = new System.Drawing.Size(459, 55);
             this.exit_button.TabIndex = 5;
             this.exit_button.Text = "Exit";
             this.exit_button.UseVisualStyleBackColor = true;
             // 
             // clear_button
             // 
-            this.clear_button.Location = new System.Drawing.Point(2, 905);
+            this.clear_button.Location = new System.Drawing.Point(5, 2158);
+            this.clear_button.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.clear_button.Name = "clear_button";
-            this.clear_button.Size = new System.Drawing.Size(172, 23);
+            this.clear_button.Size = new System.Drawing.Size(459, 55);
             this.clear_button.TabIndex = 6;
             this.clear_button.Text = "Clear";
             this.clear_button.UseVisualStyleBackColor = true;
@@ -108,36 +115,40 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 223);
+            this.label1.Location = new System.Drawing.Point(35, 532);
+            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 13);
+            this.label1.Size = new System.Drawing.Size(221, 32);
             this.label1.TabIndex = 7;
             this.label1.Text = "Projection angle";
             // 
             // parallelProjectionAngle_text
             // 
-            this.parallelProjectionAngle_text.Location = new System.Drawing.Point(103, 223);
+            this.parallelProjectionAngle_text.Location = new System.Drawing.Point(275, 532);
+            this.parallelProjectionAngle_text.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.parallelProjectionAngle_text.MaxLength = 3;
             this.parallelProjectionAngle_text.Name = "parallelProjectionAngle_text";
-            this.parallelProjectionAngle_text.Size = new System.Drawing.Size(69, 20);
+            this.parallelProjectionAngle_text.Size = new System.Drawing.Size(177, 38);
             this.parallelProjectionAngle_text.TabIndex = 8;
             this.parallelProjectionAngle_text.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.parallelProjectionAngle_text.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.parallelProjectionAngle_text_KeyPress);
             // 
             // help_button
             // 
-            this.help_button.Location = new System.Drawing.Point(2, 873);
+            this.help_button.Location = new System.Drawing.Point(5, 2082);
+            this.help_button.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.help_button.Name = "help_button";
-            this.help_button.Size = new System.Drawing.Size(172, 23);
+            this.help_button.Size = new System.Drawing.Size(459, 55);
             this.help_button.TabIndex = 9;
             this.help_button.Text = "Help";
             this.help_button.UseVisualStyleBackColor = true;
             // 
             // scaleUpBtn
             // 
-            this.scaleUpBtn.Location = new System.Drawing.Point(16, 287);
+            this.scaleUpBtn.Location = new System.Drawing.Point(43, 684);
+            this.scaleUpBtn.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.scaleUpBtn.Name = "scaleUpBtn";
-            this.scaleUpBtn.Size = new System.Drawing.Size(75, 23);
+            this.scaleUpBtn.Size = new System.Drawing.Size(200, 55);
             this.scaleUpBtn.TabIndex = 10;
             this.scaleUpBtn.Text = "Scale Up";
             this.scaleUpBtn.UseVisualStyleBackColor = true;
@@ -145,9 +156,10 @@
             // 
             // scaleDownBtn
             // 
-            this.scaleDownBtn.Location = new System.Drawing.Point(97, 287);
+            this.scaleDownBtn.Location = new System.Drawing.Point(259, 684);
+            this.scaleDownBtn.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.scaleDownBtn.Name = "scaleDownBtn";
-            this.scaleDownBtn.Size = new System.Drawing.Size(75, 23);
+            this.scaleDownBtn.Size = new System.Drawing.Size(200, 55);
             this.scaleDownBtn.TabIndex = 11;
             this.scaleDownBtn.Text = "Scale Down";
             this.scaleDownBtn.UseVisualStyleBackColor = true;
@@ -155,9 +167,10 @@
             // 
             // rotateXButton
             // 
-            this.rotateXButton.Location = new System.Drawing.Point(16, 328);
+            this.rotateXButton.Location = new System.Drawing.Point(43, 782);
+            this.rotateXButton.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.rotateXButton.Name = "rotateXButton";
-            this.rotateXButton.Size = new System.Drawing.Size(75, 23);
+            this.rotateXButton.Size = new System.Drawing.Size(200, 55);
             this.rotateXButton.TabIndex = 12;
             this.rotateXButton.Text = "Rotate X";
             this.rotateXButton.UseVisualStyleBackColor = true;
@@ -165,9 +178,10 @@
             // 
             // rotateZButton
             // 
-            this.rotateZButton.Location = new System.Drawing.Point(60, 372);
+            this.rotateZButton.Location = new System.Drawing.Point(160, 887);
+            this.rotateZButton.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.rotateZButton.Name = "rotateZButton";
-            this.rotateZButton.Size = new System.Drawing.Size(75, 23);
+            this.rotateZButton.Size = new System.Drawing.Size(200, 55);
             this.rotateZButton.TabIndex = 13;
             this.rotateZButton.Text = "Rotate Z";
             this.rotateZButton.UseVisualStyleBackColor = true;
@@ -175,9 +189,10 @@
             // 
             // rotateYButton
             // 
-            this.rotateYButton.Location = new System.Drawing.Point(97, 328);
+            this.rotateYButton.Location = new System.Drawing.Point(259, 782);
+            this.rotateYButton.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.rotateYButton.Name = "rotateYButton";
-            this.rotateYButton.Size = new System.Drawing.Size(75, 23);
+            this.rotateYButton.Size = new System.Drawing.Size(200, 55);
             this.rotateYButton.TabIndex = 14;
             this.rotateYButton.Text = "Rotate Y";
             this.rotateYButton.UseVisualStyleBackColor = true;
@@ -185,28 +200,42 @@
             // 
             // rotationAngle
             // 
-            this.rotationAngle.Location = new System.Drawing.Point(114, 409);
+            this.rotationAngle.Location = new System.Drawing.Point(304, 975);
+            this.rotationAngle.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.rotationAngle.MaxLength = 3;
             this.rotationAngle.Name = "rotationAngle";
-            this.rotationAngle.Size = new System.Drawing.Size(69, 20);
+            this.rotationAngle.Size = new System.Drawing.Size(177, 38);
             this.rotationAngle.TabIndex = 15;
             this.rotationAngle.TextChanged += new System.EventHandler(this.rotationAngle_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 409);
+            this.label2.Location = new System.Drawing.Point(37, 975);
+            this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 13);
+            this.label2.Size = new System.Drawing.Size(200, 32);
             this.label2.TabIndex = 16;
             this.label2.Text = "Rotation angle";
             // 
+            // BVisible
+            // 
+            this.BVisible.AutoSize = true;
+            this.BVisible.Location = new System.Drawing.Point(41, 1151);
+            this.BVisible.Name = "BVisible";
+            this.BVisible.Size = new System.Drawing.Size(276, 36);
+            this.BVisible.TabIndex = 17;
+            this.BVisible.Text = "No visiable back?";
+            this.BVisible.UseVisualStyleBackColor = true;
+            this.BVisible.CheckedChanged += new System.EventHandler(this.BVisible_CheckedChanged);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
-            this.ClientSize = new System.Drawing.Size(1373, 876);
+            this.ClientSize = new System.Drawing.Size(3661, 2088);
+            this.Controls.Add(this.BVisible);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.rotationAngle);
             this.Controls.Add(this.rotateYButton);
@@ -223,6 +252,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Canvas);
             this.Controls.Add(this.drawButton);
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -249,6 +279,7 @@
         private System.Windows.Forms.Button rotateYButton;
         public System.Windows.Forms.TextBox rotationAngle;
         private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.CheckBox BVisible;
     }
 }
 
