@@ -42,9 +42,13 @@ namespace Graphics3
         {
             if (graphics != null) {
                 graphics.Dispose();
+                graphics = Canvas.CreateGraphics();
             }
             BVisible.Checked = true;
-            graphics = Canvas.CreateGraphics();
+            if (graphics == null)
+            {
+                graphics = Canvas.CreateGraphics();
+            }
             this.Size = new Size(1500, 700);
 
             pen = new Pen(Color.Black, 2);
@@ -235,7 +239,7 @@ namespace Graphics3
             Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateZAxis(this, polygonList, int.Parse(rotationAngle.Text));
             Draw3d.moveBackObject(center, this, polygonList);
-            Draw3d.scale(this, this.polygonList, 1.4);
+           Draw3d.scale(this, this.polygonList, 1.4);
             clearScreen();
             tempPaint();
         }
