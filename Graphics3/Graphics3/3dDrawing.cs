@@ -261,7 +261,8 @@ namespace Graphics3
         public static void rotateZAxis(Form1 form, List<Polygon> polygonList, double angle)
         {
             //    //get the angle in radians
-            double angleInRad = (angle / 180.0) * Math.PI;
+            double angleInRad = (angle * Math.PI) / 180.0;
+            
             //    //pre calculate the cos and sin
             double cos = Math.Cos(angleInRad);
             double sin = Math.Sin(angleInRad);
@@ -298,7 +299,7 @@ namespace Graphics3
         {
             // getCenter(form);
             //    //get the angle in radians
-            double angleInRad = (angle / 180.0) * Math.PI;
+            double angleInRad = (angle * Math.PI) / 180.0;
             //    //pre calculate the cos and sin
             double cos = Math.Cos(angleInRad);
             double sin = Math.Sin(angleInRad);
@@ -388,7 +389,7 @@ namespace Graphics3
         public static void rotateXAxis(Form1 form, List<Polygon> polygonList, double angle)
         {
             //    //get the angle in radians
-            double angleInRad = (angle / 180.0) * Math.PI;
+            double angleInRad = (angle * Math.PI) / 180.0;
             //    //pre calculate the cos and sin
             double cos = Math.Cos(angleInRad);
             double sin = Math.Sin(angleInRad);
@@ -492,7 +493,7 @@ namespace Graphics3
                     if (point3D.z > max.z) max.z = point3D.z;
 
                 }
-                form.centerPoint = new Point3D(min.x+((max.x - min.x) / 2), min.y + ((max.y - min.y) / 2), min.z + ((max.z - min.z) / 2));
+                form.centerPoint = new Point3D(((max.x + min.x) / 2), ((max.y + min.y) / 2),  ((max.z + min.z) / 2));
                 form.holderCenter = form.centerPoint;
             }
         }
