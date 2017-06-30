@@ -274,10 +274,10 @@ namespace Graphics3
                     Point3D point3D = polygon.polygonPoints[i];
                     Point3D point3D1 = polygon.polygonPoints[i];
 
-                    point3D.x = ((((point3D1.x- form.centerPoint.x) * cos) - (point3D1.y- form.centerPoint.y) * sin)+ form.centerPoint.x);
-                    point3D.y = ((((point3D1.x- form.centerPoint.x) * sin) + (point3D1.y- form.centerPoint.y) * cos)+ form.centerPoint.y);
-                   // point3D.x = ((point3D1.x * cos) - (point3D1.y * sin));
-                   // point3D.y = ((point3D1.x * sin) + (point3D1.y * cos));
+                   // point3D.x = ((((point3D1.x- form.centerPoint.x) * cos) - (point3D1.y- form.centerPoint.y) * sin)+ form.centerPoint.x);
+                   // point3D.y = ((((point3D1.x- form.centerPoint.x) * sin) + (point3D1.y- form.centerPoint.y) * cos)+ form.centerPoint.y);
+                    point3D.x = ((point3D1.x * cos) - (point3D1.y * sin));
+                    point3D.y = ((point3D1.x * sin) + (point3D1.y * cos));
                     polygon.polygonPoints[i] = point3D;
                 }
             }

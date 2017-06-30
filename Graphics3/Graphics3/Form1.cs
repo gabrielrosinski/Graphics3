@@ -45,8 +45,8 @@ namespace Graphics3
             }
             BVisible.Checked = true;
             graphics = Canvas.CreateGraphics();
-            
-            
+            this.Size = new Size(1500, 700);
+
             pen = new Pen(Color.Black, 2);
 
             //clear the polygon list 
@@ -135,7 +135,6 @@ namespace Graphics3
 
                 polygonList.Add(new Polygon(pointsArray));
             }
-            //centerPoint = new Point3D(polygonList[0].polygonPoints[0].x, polygonList[0].polygonPoints[0].y, polygonList[0].polygonPoints[0].z);
             Draw3d.getCenter(this);
         }
 
@@ -163,7 +162,6 @@ namespace Graphics3
 
         public void clearScreen()
         {
-            //this.lastClicked = 0;
             graphics.Clear(Color.Gray);
         }
 
@@ -213,7 +211,6 @@ namespace Graphics3
             Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateYAxis(this, polygonList, int.Parse(rotationAngle.Text));
             Draw3d.moveBackObject(center, this, polygonList);
-         //   Draw3d.scale(this, this.polygonList, 1.05);
             clearScreen();
             tempPaint();
         }
@@ -226,7 +223,6 @@ namespace Graphics3
             Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateXAxis(this, polygonList, int.Parse(rotationAngle.Text));
             Draw3d.moveBackObject(center, this, polygonList);
-           // Draw3d.scale(this, this.polygonList, 1.05);
             clearScreen();
             tempPaint();
         }
@@ -236,9 +232,9 @@ namespace Graphics3
             if (rotationAngle.Text == String.Empty) return;
             Point3D center = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
             holderCenter = center;
-           // Draw3d.moveObjectsToZero(this, polygonList);
+            Draw3d.moveObjectsToZero(this, polygonList);
             Draw3d.rotateZAxis(this, polygonList, int.Parse(rotationAngle.Text));
-            // Draw3d.moveBackObject(center, this, polygonList);
+            Draw3d.moveBackObject(center, this, polygonList);
             Draw3d.scale(this, this.polygonList, 1.4);
             clearScreen();
             tempPaint();
