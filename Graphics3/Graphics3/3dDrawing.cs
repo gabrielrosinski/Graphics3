@@ -296,10 +296,10 @@ namespace Graphics3
                 {
                     Point3D point3D = polygon.polygonPoints[i];
                     Point3D point3D1 = polygon.polygonPoints[i];
-                    point3D.z = (((point3D1.z- form.centerPoint.z) * cos) - ((point3D1.x- form.centerPoint.x) * sin)+ form.centerPoint.z);
-                    point3D.x = (((point3D1.z - form.centerPoint.z) * sin) + ((point3D1.x- form.centerPoint.x) * cos)+ form.centerPoint.x);
-                   // point3D.z = ((point3D.z * cos) - (point3D.x * sin));
-                    //point3D.x = ((point3D1.z * sin) + (point3D1.x * cos));
+                  //  point3D.z = (((point3D1.z- form.centerPoint.z) * cos) - ((point3D1.x- form.centerPoint.x) * sin)+ form.centerPoint.z);
+                    //point3D.x = (((point3D1.z - form.centerPoint.z) * sin) + ((point3D1.x- form.centerPoint.x) * cos)+ form.centerPoint.x);
+                    point3D.z = ((point3D.z * cos) - (point3D.x * sin));
+                    point3D.x = ((point3D1.z * sin) + (point3D1.x * cos));
                     polygon.polygonPoints[i] = point3D;
                 }
             }
@@ -319,10 +319,10 @@ namespace Graphics3
                 {
                     Point3D point3D = polygon.polygonPoints[i];
                     Point3D point3D1 = polygon.polygonPoints[i];
-                    point3D.z = (((point3D1.y - form.centerPoint.y) * cos) - ((point3D1.z - form.centerPoint.z) * sin) + form.centerPoint.z);
-                    point3D.y = (((point3D1.y - form.centerPoint.y) * sin) + ((point3D1.z - form.centerPoint.z) * cos) + form.centerPoint.y);
-                   // point3D.y = ((point3D.y * cos) - (point3D.z * sin));
-                   // point3D.z = ((point3D1.y * sin) + (point3D1.z * cos));
+                   // point3D.z = (((point3D1.y - form.centerPoint.y) * cos) - ((point3D1.z - form.centerPoint.z) * sin) + form.centerPoint.z);
+                   // point3D.y = (((point3D1.y - form.centerPoint.y) * sin) + ((point3D1.z - form.centerPoint.z) * cos) + form.centerPoint.y);
+                   point3D.y = ((point3D.y * cos) - (point3D.z * sin));
+                    point3D.z = ((point3D1.y * sin) + (point3D1.z * cos));
                     polygon.polygonPoints[i] = point3D;
                 }
             }
