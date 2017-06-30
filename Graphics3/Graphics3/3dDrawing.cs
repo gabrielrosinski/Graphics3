@@ -40,6 +40,7 @@ namespace Graphics3
                 {
                     drawPolygons(form, objectsPointsList);
                 }
+
                 //draw objects in prespective
                // drawPolygons(form, objectsPointsList);
                 objectsPointsList = new List<Point>();
@@ -190,9 +191,6 @@ namespace Graphics3
         }
 
 
-
-
-
         //Transformations
 
         public static void scale(Form1 form, List<Polygon> polygonList, double scaleFactor)
@@ -255,6 +253,10 @@ namespace Graphics3
             form.clearScreen();
             form.tempPaint();
         }
+
+
+
+
 
         public static void rotateZAxis(Form1 form, List<Polygon> polygonList, double angle)
         {
@@ -415,10 +417,10 @@ namespace Graphics3
             double Normal;
 
             x0 = Points[0].X;
-            x1 = Points[1].X;
-            x2 = Points[2].X;
             y0 = Points[0].Y;
+            x1 = Points[1].X;
             y1 = Points[1].Y;
+            x2 = Points[2].X;
             y2 = Points[2].Y;
             Normal = ((x1 - x0) * (y0 - y2)) - ((y1 - y0) * (x0 - x2));
             if (Normal <= 0)

@@ -142,7 +142,7 @@ namespace Graphics3
         private void drawButton_Click(object sender, EventArgs e)
         {
             this.lastClicked = 1;
-            //clearScreen();
+            init();
             Draw3d.drawPrespective(this, this.polygonList);
         }
 
@@ -150,21 +150,20 @@ namespace Graphics3
         {
             if (parallelProjectionAngle_text.Text == String.Empty) return;
             this.lastClicked = 2;
-            //clearScreen();
+            init();
             Draw3d.drawParallel(this, this.polygonList);
         }
 
         private void drawObliqueClicked(object sender, EventArgs e)
         {
             this.lastClicked = 3;
-            //clearScreen();
+            init();
             Draw3d.drawOblique(this, this.polygonList);
         }
 
         public void clearScreen()
         {
             //this.lastClicked = 0;
-            //init();
             graphics.Clear(Color.Gray);
         }
 
