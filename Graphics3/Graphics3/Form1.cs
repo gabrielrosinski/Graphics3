@@ -42,13 +42,9 @@ namespace Graphics3
         {
             if (graphics != null) {
                 graphics.Dispose();
-                graphics = Canvas.CreateGraphics();
             }
-            BVisible.Checked = true;
-            if (graphics == null)
-            {
-                graphics = Canvas.CreateGraphics();
-            }
+            BVisible.Checked = false;
+            graphics = Canvas.CreateGraphics();
             this.Size = new Size(1500, 700);
 
             pen = new Pen(Color.Black, 2);
