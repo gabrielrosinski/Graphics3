@@ -40,9 +40,6 @@ namespace Graphics3
                 {
                     drawPolygons(form, objectsPointsList);
                 }
-
-                //draw objects in prespective
-               // drawPolygons(form, objectsPointsList);
                 objectsPointsList = new List<Point>();
 
             }
@@ -119,7 +116,6 @@ namespace Graphics3
                 { cos, sin, 0, 0 },
                 { 0, 0, 0, 1 }
             };
-
             double[,] pointMatrix = { 
                 {
                     point.x,
@@ -128,13 +124,10 @@ namespace Graphics3
                     1
                 }
             };
-
             double[,] result = multiplyMatrix(pointMatrix, parallelMatrix);
-
             return new Point((int)result[0, 0], (int)result[0, 1]);
         }
 
-        //
         public static void drawOblique(Form1 form, List<Polygon> polygonList)
         {
             List<Point> objectsPointsList = new List<Point>();
@@ -161,7 +154,6 @@ namespace Graphics3
                     drawPolygons(form, objectsPointsList);
                 }
                 //draw objects in prespective
-              //  drawPolygons(form, objectsPointsList);
                 objectsPointsList = new List<Point>();
             }
         }
@@ -184,21 +176,18 @@ namespace Graphics3
                     1
                 }
             };
-
             double[,] result = multiplyMatrix(pointMatrix, obliqueMatrix);
-
             return new Point((int)result[0, 0], (int)result[0, 1]);
         }
-
 
         //Transformations
 
         public static void scale(Form1 form, List<Polygon> polygonList, double scaleFactor)
         {
             List<Polygon> newPoligonList = new List<Polygon>();
-            Polygon newPolygon;// = new Polygon();
+            Polygon newPolygon;
             Point3D point;
-            List<Point3D> tempPointList;// = new List<Point3D>();
+            List<Point3D> tempPointList;
 
             double[] distance = {
                 form.centerPoint.x,
@@ -243,10 +232,8 @@ namespace Graphics3
                     tempPointList.Add(point);
                 }
 
-
                 newPolygon.polygonPoints = tempPointList.ToArray();
                 newPoligonList.Add(newPolygon);
-
             }
 
             form.polygonList = newPoligonList;
@@ -254,42 +241,28 @@ namespace Graphics3
             form.tempPaint();
         }
 
-
-
-
-
         public static void rotateZAxis(Form1 form, List<Polygon> polygonList, double angle)
         {
-            //    //get the angle in radians
-            double angleInRad = (angle * Math.PI) / 180.0;
-            
-            //    //pre calculate the cos and sin
-            double cos = Math.Cos(angleInRad);
-            double sin = Math.Sin(angleInRad);
-
+            //get the angle in radians
+            double Angle = (angle * (Math.PI / 180));
             foreach (Polygon polygon in polygonList)
             {
                 for (int i = 0; i < polygon.polygonPoints.Length; ++i)
                 {
                     Point3D point3D = polygon.polygonPoints[i];
-                    Point3D point3D1 = polygon.polygonPoints[i];
-                    /*
-                    point3D.x = ((((point3D1.x- form.centerPoint.x) * cos) - (point3D1.y- form.centerPoint.y) * sin)+ form.centerPoint.x);
-                    point3D.y = ((((point3D1.x- form.centerPoint.x) * sin) + (point3D1.y- form.centerPoint.y) * cos)+ form.centerPoint.y);
-                   // point3D.x = ((point3D1.x * cos) - (point3D1.y * sin));
-                   // point3D.y = ((point3D1.x * sin) + (point3D1.y * cos));
-                    polygon.polygonPoints[i] = point3D;
-                    */
-
-                    double[] Distance = { form.centerPoint.x, form.centerPoint.y, form.centerPoint.z };
-                    double[,] Array = { { point3D1.x, point3D1.y, point3D1.z, 1 } };
-                    Array = multiplyMatrix(Array, Tran_Fix(Distance));
-                    Array = multiplyMatrix(Array, RotateZ(angle));
-                    Array = multiplyMatrix(Array, Transition(Distance));
-
-                    point3D.x = (int)Array[0, 0];
-                    point3D.y = (int)Array[0, 1];
-                    point3D.z = (int)Array[0, 2];
+                    double[,] rotationMatrix = { 
+                        { Math.Cos(Angle), Math.Sin(Angle), 0, 0 }, 
+                        { -Math.Sin(Angle), Math.Cos(Angle), 0, 0 }, 
+                        { 0, 0, 1, 0 },
+                        { 0, 0, 0, 1 } };
+                    double[] center = { form.centerPoint.x, form.centerPoint.y, form.centerPoint.z };
+                    double[,] array = { { point3D.x, point3D.y, point3D.z, 1 } };
+                    array = multiplyMatrix(array, TransitionToZero(center));
+                    array = multiplyMatrix(array, rotationMatrix);
+                    array = multiplyMatrix(array, TransitionBack(center));
+                    point3D.x = (int)array[0, 0];
+                    point3D.y = (int)array[0, 1];
+                    point3D.z = (int)array[0, 2];
                     polygon.polygonPoints[i] = point3D;
                 }
             }
@@ -297,82 +270,72 @@ namespace Graphics3
 
         public static void rotateYAxis(Form1 form, List<Polygon> polygonList, double angle)
         {
-            // getCenter(form);
-            //    //get the angle in radians
-            double angleInRad = (angle * Math.PI) / 180.0;
-            //    //pre calculate the cos and sin
-            double cos = Math.Cos(angleInRad);
-            double sin = Math.Sin(angleInRad);
-
+            //get the angle in radians
+            double Angle = (angle * (Math.PI / 180));
             foreach (Polygon polygon in polygonList)
             {
                 for (int i = 0; i < polygon.polygonPoints.Length; ++i)
                 {
                     Point3D point3D = polygon.polygonPoints[i];
-                    Point3D point3D1 = polygon.polygonPoints[i];
-                    //  point3D.z = (((point3D1.z- form.centerPoint.z) * cos) - ((point3D1.x- form.centerPoint.x) * sin)+ form.centerPoint.z);
-                    //point3D.x = (((point3D1.z - form.centerPoint.z) * sin) + ((point3D1.x- form.centerPoint.x) * cos)+ form.centerPoint.x);
-                    
-                    /*
-                    point3D.z = ((point3D.z * cos) - (point3D.x * sin));
-                    point3D.x = ((point3D1.z * sin) + (point3D1.x * cos));
-                    polygon.polygonPoints[i] = point3D;
-                    */
-
-                    
-                    double[] Distance = { form.centerPoint.x, form.centerPoint.y, form.centerPoint.z };
-                    double[,] Array = { { point3D1.x, point3D1.y, point3D1.z, 1 } };
-                    Array = multiplyMatrix(Array, Tran_Fix(Distance));
-                    Array = multiplyMatrix(Array, RotateY(angle));
-                    Array = multiplyMatrix(Array, Transition(Distance));
-
-                    point3D.x = (int)Array[0, 0];
-                    point3D.y = (int)Array[0, 1];
-                    point3D.z = (int)Array[0, 2];
-                    polygon.polygonPoints[i] = point3D;
-                    
+                    double[,] rotationMatrix = {
+                        { Math.Cos(Angle), 0, -Math.Sin(Angle), 0 }, 
+                        { 0, 1, 0, 0 }, 
+                        { Math.Sin(Angle), 0, Math.Cos(Angle), 0 },
+                        { 0, 0, 0, 1 } };
+                    double[] center = { form.centerPoint.x, form.centerPoint.y, form.centerPoint.z };
+                    double[,] array = { { point3D.x, point3D.y, point3D.z, 1 } };
+                    array = multiplyMatrix(array, TransitionToZero(center));
+                    array = multiplyMatrix(array, rotationMatrix);
+                    array = multiplyMatrix(array, TransitionBack(center));
+                    point3D.x = (int)array[0, 0];
+                    point3D.y = (int)array[0, 1];
+                    point3D.z = (int)array[0, 2];
+                    polygon.polygonPoints[i] = point3D;                   
                 }
-
-
-
             }
         }
 
-        public static double[,] Transition(double[] Tran)
+        public static void rotateXAxis(Form1 form, List<Polygon> polygonList, double angle)
         {
-            double[,] Matrix = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { Tran[0], Tran[1], Tran[2], 1 } };
-            return Matrix;
+            //get the angle in radians
+            double Angle = (angle * (Math.PI / 180));
+            foreach (Polygon polygon in polygonList)
+            {
+                for (int i = 0; i < polygon.polygonPoints.Length; ++i)
+                {
+                    Point3D point3D = polygon.polygonPoints[i];
+                    double[,] rotationMatrix = { 
+                        { 1, 0, 0, 0 },
+                        { 0, Math.Cos(Angle), Math.Sin(Angle), 0 },
+                        { 0, -Math.Sin(Angle), Math.Cos(Angle), 0 },
+                        { 0, 0, 0, 1 } };
+                    double[] center = { form.centerPoint.x, form.centerPoint.y, form.centerPoint.z };
+                    double[,] array = { { point3D.x, point3D.y, point3D.z, 1 } };
+                    array = multiplyMatrix(array, TransitionToZero(center));
+                    array = multiplyMatrix(array, rotationMatrix);
+                    array = multiplyMatrix(array, TransitionBack(center));
+
+                    point3D.x = (int)array[0, 0];
+                    point3D.y = (int)array[0, 1];
+                    point3D.z = (int)array[0, 2];
+                    polygon.polygonPoints[i] = point3D;
+                }
+            }
         }
 
-        //Rotating Y Axis
-        public static double[,] RotateY(double Angle)
-        {
-            Angle = (Angle * (Math.PI / 180));
-            double[,] Matrix = { { Math.Cos(Angle), 0, -Math.Sin(Angle), 0 }, { 0, 1, 0, 0 }, { Math.Sin(Angle), 0, Math.Cos(Angle), 0 }, { 0, 0, 0, 1 } };
-            return Matrix;
-        }
-
-        //Rotating X Axis
-        public static double[,] RotateX(double Angle)
-        {
-            Angle = (Angle * (Math.PI / 180));
-            double[,] Matrix = { { 1, 0, 0, 0 }, { 0, Math.Cos(Angle), Math.Sin(Angle), 0 }, { 0, -Math.Sin(Angle), Math.Cos(Angle), 0 }, { 0, 0, 0, 1 } };
-            return Matrix;
-        }
-
-        //Rotating Z Axis
-        public static double[,] RotateZ(double Angle)
-        {
-            Angle = (Angle * (Math.PI / 180));
-            double[,] Matrix = { { Math.Cos(Angle), Math.Sin(Angle), 0, 0 }, { -Math.Sin(Angle), Math.Cos(Angle), 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
-
-            return Matrix;
-        }
-
-
-        public static double[,] Tran_Fix(double[] Length)
+        public static double[,] TransitionBack(double[] Tran)
         {
             double[,] Matrix = { 
+                { 1, 0, 0, 0 }, 
+                { 0, 1, 0, 0 },
+                { 0, 0, 1, 0 },
+                { Tran[0], Tran[1], Tran[2], 1 } };
+            return Matrix;
+        }
+
+        public static double[,] TransitionToZero(double[] Length)
+        {
+            double[,] Matrix = {
                 { 1, 0, 0, 0 },
                 { 0, 1, 0, 0 },
                 { 0, 0, 1, 0 },
@@ -385,50 +348,11 @@ namespace Graphics3
 
             return Matrix;
         }
-
-        public static void rotateXAxis(Form1 form, List<Polygon> polygonList, double angle)
-        {
-            //    //get the angle in radians
-            double angleInRad = (angle * Math.PI) / 180.0;
-            //    //pre calculate the cos and sin
-            double cos = Math.Cos(angleInRad);
-            double sin = Math.Sin(angleInRad);
-
-            foreach (Polygon polygon in polygonList)
-            {
-                for (int i = 0; i < polygon.polygonPoints.Length; ++i)
-                {
-                    Point3D point3D = polygon.polygonPoints[i];
-                    Point3D point3D1 = polygon.polygonPoints[i];
-                    // point3D.z = (((point3D1.y - form.centerPoint.y) * cos) - ((point3D1.z - form.centerPoint.z) * sin) + form.centerPoint.z);
-                    // point3D.y = (((point3D1.y - form.centerPoint.y) * sin) + ((point3D1.z - form.centerPoint.z) * cos) + form.centerPoint.y);
-
-                    /*
-                    point3D.y = ((point3D.y * cos) - (point3D.z * sin));
-                    point3D.z = ((point3D1.y * sin) + (point3D1.z * cos));
-                    polygon.polygonPoints[i] = point3D;
-                    */
-
-                    double[] Distance = { form.centerPoint.x, form.centerPoint.y, form.centerPoint.z };
-                    double[,] Array = { { point3D1.x, point3D1.y, point3D1.z, 1 } };
-                    Array = multiplyMatrix(Array, Tran_Fix(Distance));
-                    Array = multiplyMatrix(Array, RotateX(angle));
-                    Array = multiplyMatrix(Array, Transition(Distance));
-
-                    point3D.x = (int)Array[0, 0];
-                    point3D.y = (int)Array[0, 1];
-                    point3D.z = (int)Array[0, 2];
-                    polygon.polygonPoints[i] = point3D;
-                }
-            }
-        }
-
         //Utilties
         public static void moveObjectsToZero(Form1 form, List<Polygon> polygonList)
         {
             Point3D centerPoint = new Point3D(form.centerPoint.x, form.centerPoint.y, form.centerPoint.z);
             //create 2d representation of the polygons
-           // form.holderCenter = new Point3D(centerPoint.x, centerPoint.y, centerPoint.z);
             foreach (Polygon polygon in polygonList)
             {
                 for (int i = 0; i < polygon.polygonPoints.Length; ++i)
@@ -501,9 +425,6 @@ namespace Graphics3
         public static void drawPolygons(Form1 form, List<Point> points)
         {
             form.graphics.DrawPolygon(form.pen, points.ToArray());
-           /// Rectangle rectangle1 = new Rectangle((int)form.centerPoint.x, (int)form.centerPoint.y, 4, 4);
-            //form.graphics.DrawRectangle(Pens.Black, rectangle1);
-            //form.graphics.FillRectangle(Brushes.Red, rectangle1);
         }
 
         public static bool FullStruct(List<Point> Points)
@@ -544,9 +465,7 @@ namespace Graphics3
             {
                 Console.WriteLine("\n Number of columns in First Matrix should be equal to Number of rows in Second Matrix.");
                 Console.WriteLine("\n Please re-enter correct dimensions.");
-                //Environment.Exit(-1);
             }
-
             return newMatrix;
         }
     }
