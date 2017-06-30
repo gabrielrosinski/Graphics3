@@ -272,10 +272,23 @@ namespace Graphics3
                 {
                     Point3D point3D = polygon.polygonPoints[i];
                     Point3D point3D1 = polygon.polygonPoints[i];
+                    /*
                     point3D.x = ((((point3D1.x- form.centerPoint.x) * cos) - (point3D1.y- form.centerPoint.y) * sin)+ form.centerPoint.x);
                     point3D.y = ((((point3D1.x- form.centerPoint.x) * sin) + (point3D1.y- form.centerPoint.y) * cos)+ form.centerPoint.y);
                    // point3D.x = ((point3D1.x * cos) - (point3D1.y * sin));
                    // point3D.y = ((point3D1.x * sin) + (point3D1.y * cos));
+                    polygon.polygonPoints[i] = point3D;
+                    */
+
+                    double[] Distance = { form.centerPoint.x, form.centerPoint.y, form.centerPoint.z };
+                    double[,] Array = { { point3D1.x, point3D1.y, point3D1.z, 1 } };
+                    Array = multiplyMatrix(Array, Tran_Fix(Distance));
+                    Array = multiplyMatrix(Array, RotateZ(angle));
+                    Array = multiplyMatrix(Array, Transition(Distance));
+
+                    point3D.x = (int)Array[0, 0];
+                    point3D.y = (int)Array[0, 1];
+                    point3D.z = (int)Array[0, 2];
                     polygon.polygonPoints[i] = point3D;
                 }
             }
@@ -296,13 +309,80 @@ namespace Graphics3
                 {
                     Point3D point3D = polygon.polygonPoints[i];
                     Point3D point3D1 = polygon.polygonPoints[i];
-                  //  point3D.z = (((point3D1.z- form.centerPoint.z) * cos) - ((point3D1.x- form.centerPoint.x) * sin)+ form.centerPoint.z);
+                    //  point3D.z = (((point3D1.z- form.centerPoint.z) * cos) - ((point3D1.x- form.centerPoint.x) * sin)+ form.centerPoint.z);
                     //point3D.x = (((point3D1.z - form.centerPoint.z) * sin) + ((point3D1.x- form.centerPoint.x) * cos)+ form.centerPoint.x);
+                    
+                    /*
                     point3D.z = ((point3D.z * cos) - (point3D.x * sin));
                     point3D.x = ((point3D1.z * sin) + (point3D1.x * cos));
                     polygon.polygonPoints[i] = point3D;
+                    */
+
+                    
+                    double[] Distance = { form.centerPoint.x, form.centerPoint.y, form.centerPoint.z };
+                    double[,] Array = { { point3D1.x, point3D1.y, point3D1.z, 1 } };
+                    Array = multiplyMatrix(Array, Tran_Fix(Distance));
+                    Array = multiplyMatrix(Array, RotateY(angle));
+                    Array = multiplyMatrix(Array, Transition(Distance));
+
+                    point3D.x = (int)Array[0, 0];
+                    point3D.y = (int)Array[0, 1];
+                    point3D.z = (int)Array[0, 2];
+                    polygon.polygonPoints[i] = point3D;
+                    
                 }
+
+
+
             }
+        }
+
+        public static double[,] Transition(double[] Tran)
+        {
+            double[,] Matrix = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { Tran[0], Tran[1], Tran[2], 1 } };
+            return Matrix;
+        }
+
+        //Rotating Y Axis
+        public static double[,] RotateY(double Angle)
+        {
+            Angle = (Angle * (Math.PI / 180));
+            double[,] Matrix = { { Math.Cos(Angle), 0, -Math.Sin(Angle), 0 }, { 0, 1, 0, 0 }, { Math.Sin(Angle), 0, Math.Cos(Angle), 0 }, { 0, 0, 0, 1 } };
+            return Matrix;
+        }
+
+        //Rotating X Axis
+        public static double[,] RotateX(double Angle)
+        {
+            Angle = (Angle * (Math.PI / 180));
+            double[,] Matrix = { { 1, 0, 0, 0 }, { 0, Math.Cos(Angle), Math.Sin(Angle), 0 }, { 0, -Math.Sin(Angle), Math.Cos(Angle), 0 }, { 0, 0, 0, 1 } };
+            return Matrix;
+        }
+
+        //Rotating Z Axis
+        public static double[,] RotateZ(double Angle)
+        {
+            Angle = (Angle * (Math.PI / 180));
+            double[,] Matrix = { { Math.Cos(Angle), Math.Sin(Angle), 0, 0 }, { -Math.Sin(Angle), Math.Cos(Angle), 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+
+            return Matrix;
+        }
+
+
+        public static double[,] Tran_Fix(double[] Length)
+        {
+            double[,] Matrix = { 
+                { 1, 0, 0, 0 },
+                { 0, 1, 0, 0 },
+                { 0, 0, 1, 0 },
+                {
+                    -Length[0],
+                    -Length[1],
+                    -Length[2],
+                    1 }
+            };
+
+            return Matrix;
         }
 
         public static void rotateXAxis(Form1 form, List<Polygon> polygonList, double angle)
@@ -319,10 +399,24 @@ namespace Graphics3
                 {
                     Point3D point3D = polygon.polygonPoints[i];
                     Point3D point3D1 = polygon.polygonPoints[i];
-                   // point3D.z = (((point3D1.y - form.centerPoint.y) * cos) - ((point3D1.z - form.centerPoint.z) * sin) + form.centerPoint.z);
-                   // point3D.y = (((point3D1.y - form.centerPoint.y) * sin) + ((point3D1.z - form.centerPoint.z) * cos) + form.centerPoint.y);
-                   point3D.y = ((point3D.y * cos) - (point3D.z * sin));
+                    // point3D.z = (((point3D1.y - form.centerPoint.y) * cos) - ((point3D1.z - form.centerPoint.z) * sin) + form.centerPoint.z);
+                    // point3D.y = (((point3D1.y - form.centerPoint.y) * sin) + ((point3D1.z - form.centerPoint.z) * cos) + form.centerPoint.y);
+
+                    /*
+                    point3D.y = ((point3D.y * cos) - (point3D.z * sin));
                     point3D.z = ((point3D1.y * sin) + (point3D1.z * cos));
+                    polygon.polygonPoints[i] = point3D;
+                    */
+
+                    double[] Distance = { form.centerPoint.x, form.centerPoint.y, form.centerPoint.z };
+                    double[,] Array = { { point3D1.x, point3D1.y, point3D1.z, 1 } };
+                    Array = multiplyMatrix(Array, Tran_Fix(Distance));
+                    Array = multiplyMatrix(Array, RotateX(angle));
+                    Array = multiplyMatrix(Array, Transition(Distance));
+
+                    point3D.x = (int)Array[0, 0];
+                    point3D.y = (int)Array[0, 1];
+                    point3D.z = (int)Array[0, 2];
                     polygon.polygonPoints[i] = point3D;
                 }
             }
